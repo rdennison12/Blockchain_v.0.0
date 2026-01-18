@@ -1,0 +1,14 @@
+.idea
+.blockchain_env
+__pycache__/
+backend/__pycache__/
+backend/blockchain/__pycache__/
+backend/Scripts/__pycache__/
+backend/util/__pycache__/
+backend/tests/blockchain/__pycache__/
+backend/tests/util/__pycache__/
+backend/app/pubsub_config.py
+
+/git-key.ppk
+/key-ssh.ppk
+/key-ssh.txt

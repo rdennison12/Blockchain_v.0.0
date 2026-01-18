@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pytest = "==9.0.2"
+flask = "==3.1.2"
+pubnub = "==10.5.0"
+flask-cors = "==6.0.2"
+cryptography = "==46.0.3"
+python-dotenv = "==1.2.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.14"
+python_full_version = "3.14.0"
