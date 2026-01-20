@@ -1,0 +1,4 @@
+# Add your actual PubNub keys here
+
+SUBSCRIBE_KEY = "sub-c-your-actual-key"
+PUBLISH_KEY = "pub-c-your-actual-key"

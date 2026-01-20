@@ -8,7 +8,3 @@ backend/util/__pycache__/
 backend/tests/blockchain/__pycache__/
 backend/tests/util/__pycache__/
 backend/app/pubsub_config.py
-
-/git-key.ppk
-/key-ssh.ppk
-/key-ssh.txt

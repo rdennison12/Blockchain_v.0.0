@@ -2,6 +2,28 @@
 Description: A blockchain implementation in Python. For this project, I use the pipenv virtual environment.
 This could change in the future to use the venv module.
 
+## Commits
+* Initial commit: Created project and README
+* Crated the Blockchain and Block classes
+* Begin creating the hashing algorithm 
+* Tweaked the hashing algorithm
+* Moved repo to GitHub
+* Added README updates
+* Begin testing the application
+* Added new tests and a script to find the average block creation rate
+* Added Proof of Work (POW) with associated tests
+* Added Block validation and the associated tests
+* Updated .gitignore
+* Completed preparing the Blockchain for collaboration
+* Begin the process of creating the interfaces for collaboration
+* Created the beginning of the API
+* Moved PubNub keys into a separate file for security
+* Rebuilt repository to exclude certain files
+* Completed the Flask API and the publish/subscriber layers
+
+
+
+
 ## Getting Started
 On Windows:
 
@@ -24,8 +46,7 @@ deactivate
 pipenv shell
 ```
 
-For all the below commands ensure that the virtual environment 
-has been activated if using a venv environment.
+For all the below commands ensure that the virtual environment has been activated.
 
 **Install all packages**
 ```
@@ -55,21 +76,8 @@ py -m pytest backend\tests\
 py -m backend.app
 ```
 
-## Commits
-* Initial commit: Created project and README
-* Crated the Blockchain and Block classes
-* Begin creating the hashing algorithm 
-* Tweaked the hashing algorithm
-* Moved repo to GitHub
-* Added README updates
-* Begin testing the application
-* Added new tests and a script to find the average block creation rate
-* Added Proof of Work (POW) with associated tests
-* Added Block validation and the associated tests
-* Updated .gitignore
-* Completed preparing the Blockchain for collaboration
-* Begin the process of creating the interfaces for collaboration
-* Created the beginning of the API
-* Moved PubNub keys into a separate file for security
-* Rebuilt repository to exclude certain files
-* 
+**To run the application with a peer on Windows using Powershell**
+```
+ $env:PEER='True'; py -m backend.app
+```
+
