@@ -1,6 +1,7 @@
 import time
 
 from backend.blockchain.block import Block
+from backend.blockchain.blockchain import Blockchain
 from pubnub.callbacks import SubscribeCallback
 from pubnub.pubnub import PubNub
 from pubnub.pnconfiguration import PNConfiguration
@@ -59,11 +60,17 @@ class PubSub:
         self.pubnub.subscribe().channels([channel]).execute()
 
     def broadcast_block(self, block):
+        """
+        Broadcast a block object to all nodes.
+        :param block:
+        :return:
+        """
         self.publish(CHANNELS['BLOCK'], block.to_json())
 
 
 def main():
-    pubsub = PubSub()
+    blockchain = Blockchain()
+    pubsub = PubSub(blockchain)
     time.sleep(1)
     pubsub.publish(CHANNELS['TEST'], {'foo': 'bar'})
 
