@@ -21,6 +21,7 @@ This could change in the future to use the venv module.
 * Rebuilt repository to exclude certain files
 * Completed the Flask API and the publish/subscriber layers
 * Begin adding the Wallet and Transaction classes with associated tests
+* Adding the ability to run transactions on a network
 
 
 
