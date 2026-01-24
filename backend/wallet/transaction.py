@@ -2,15 +2,16 @@ import time
 import uuid
 
 from backend.wallet.wallet import Wallet
-from backend.config import MINING_REWARD, MINING_REWARD_INPUT
 
 
 class Transaction:
-    """
-    Document of an exchange in currency from a sender to one or more recipients.
-    """
-
     def __init__(self, sender_wallet, recipient, amount):
+        """
+        Document an exchange in currency from a sender to one or more recipients.
+        :param sender_wallet:
+        :param recipient:
+        :param amount:
+        """
         self.id = str(uuid.uuid4())[0:8]
         self.output = self.create_output(
             sender_wallet,
@@ -34,7 +35,7 @@ class Transaction:
             raise Exception('Amount exceeds balance')
 
         if recipient in self.output:
-            self.output[recipient] += amount
+            self.output[recipient] = self.output[recipient] + amount
         else:
             self.output[recipient] = amount
 
@@ -45,15 +46,18 @@ class Transaction:
 
     def to_json(self):
         """
-        Serializes the transaction into a JSON object.
+        Serialize the transaction.
+        Convert large signature integers into strings to prevent JSON serialization errors.
         :return:
         """
+        # We need to convert large integers to strings so that they can be used for testing the
+        # application.
         return self.__dict__
 
     @staticmethod
-    def create_output(sender_wallet, recipient, amount):  # self,
+    def create_output(sender_wallet, recipient, amount):
         """
-        Structures the output data for a transaction.
+        Structure the output data for the transaction.
         :param sender_wallet:
         :param recipient:
         :param amount:
@@ -61,18 +65,16 @@ class Transaction:
         """
         if amount > sender_wallet.balance:
             raise Exception('Amount exceeds balance')
-
         output = dict()
         output[recipient] = amount
         output[sender_wallet.address] = sender_wallet.balance - amount
-
         return output
 
     @staticmethod
-    def create_input(sender_wallet, output):  # self,
+    def create_input(sender_wallet, output):
         """
-        Structures the input data for a transaction.
-        Signs the transaction and includes the sender's public key and address.
+        Structure the input data for the transaction.
+        Sign the transaction and includes the sender's public key and address.
         :param sender_wallet:
         :param output:
         :return:
@@ -98,15 +100,15 @@ class Transaction:
             raise Exception('Invalid transaction output values')
 
         if not Wallet.verify(
-            transaction.input['public_key'],
-            transaction.output,
-            transaction.input['signature']
+                transaction.input['public_key'],
+                transaction.output,
+                transaction.input['signature']
         ):
             raise Exception('Invalid signature')
 
 
 def main():
-    transaction = Transaction(Wallet(), 'recipient', 10)
+    transaction = Transaction(Wallet(), 'recipient', 15)
     print(f'transaction.__dict__: {transaction.__dict__}')
 
 

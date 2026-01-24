@@ -15,14 +15,16 @@ pnconfig.user_id = "blockchain-backend-shell"
 
 CHANNELS = {
     'TEST': 'TEST',
-    'BLOCK': 'BLOCK'
+    'BLOCK': 'BLOCK',
+    'TRANSACTION': 'TRANSACTION'
 }
 
 
 class Listener(SubscribeCallback):
-    def __init__(self, blockchain):
+    def __init__(self, blockchain, transaction_pool):
         super().__init__()
         self.blockchain = blockchain
+        self.transaction_pool = transaction_pool
 
     def message(self, pubnub, message_object):
         print(f'\n-- Channel: {message_object.channel} | Message: {message_object.message}')
@@ -35,6 +37,8 @@ class Listener(SubscribeCallback):
                 self.blockchain.replace_chain(potential_chain)
             except Exception as e:
                 print(f'\n -- Did not replace chain: {e}')
+        elif message_object.channel == CHANNELS['TRANSACTION']:
+            print(f'\n -- Received transaction: {message_object.message}')
 
 
 class PubSub:
@@ -43,10 +47,10 @@ class PubSub:
     Provides communication between the nodes of the blockchain network.
     """
 
-    def __init__(self, blockchain):
+    def __init__(self, blockchain, transaction_pool):
         self.pubnub = PubNub(pnconfig)
         self.pubnub.subscribe().channels(CHANNELS.values()).execute()
-        self.pubnub.add_listener(Listener(blockchain))
+        self.pubnub.add_listener(Listener(blockchain, transaction_pool))
 
     def publish(self, channel, message):
         """
@@ -66,6 +70,14 @@ class PubSub:
         :return:
         """
         self.publish(CHANNELS['BLOCK'], block.to_json())
+
+    def broadcast_transaction(self, transaction):
+        """
+        Broadcast a transaction object to all nodes.
+        :param transaction:
+        :return:
+        """
+        self.publish(CHANNELS['TRANSACTION'], transaction.to_json())
 
 
 def main():

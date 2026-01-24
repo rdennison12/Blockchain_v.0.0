@@ -7,7 +7,7 @@ from backend.wallet.wallet import Wallet
 def test_transaction():
     sender_wallet = Wallet()
     recipient = 'recipient'
-    amount = 10
+    amount = 50
     transaction = Transaction(sender_wallet, recipient, amount)
 
     assert transaction.output[recipient] == amount

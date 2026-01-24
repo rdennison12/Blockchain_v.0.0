@@ -22,6 +22,7 @@ This could change in the future to use the venv module.
 * Completed the Flask API and the publish/subscriber layers
 * Begin adding the Wallet and Transaction classes with associated tests
 * Adding the ability to run transactions on a network
+* Fixed a bug in the tracaction and wallet classes
 
 
 
