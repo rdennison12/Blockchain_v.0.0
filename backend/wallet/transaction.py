@@ -5,20 +5,28 @@ from backend.wallet.wallet import Wallet
 
 
 class Transaction:
-    def __init__(self, sender_wallet, recipient, amount):
+    def __init__(
+            self,
+            sender_wallet=None,
+            recipient=None,
+            amount=None,
+            id=None,
+            output=None,
+            input=None
+    ):
         """
         Document an exchange in currency from a sender to one or more recipients.
         :param sender_wallet:
         :param recipient:
         :param amount:
         """
-        self.id = str(uuid.uuid4())[0:8]
-        self.output = self.create_output(
+        self.id = id or str(uuid.uuid4())[0:8]
+        self.output = output or self.create_output(
             sender_wallet,
             recipient,
             amount
         )
-        self.input = self.create_input(
+        self.input = input or self.create_input(
             sender_wallet,
             self.output
         )
@@ -53,6 +61,15 @@ class Transaction:
         # We need to convert large integers to strings so that they can be used for testing the
         # application.
         return self.__dict__
+
+    @staticmethod
+    def from_json(transaction_json):
+        """
+        Deserialize a transaction's JSON.
+        :param transaction_json:
+        :return:
+        """
+        return Transaction(**transaction_json)
 
     @staticmethod
     def create_output(sender_wallet, recipient, amount):
@@ -109,7 +126,11 @@ class Transaction:
 
 def main():
     transaction = Transaction(Wallet(), 'recipient', 15)
-    print(f'transaction.__dict__: {transaction.__dict__}')
+    print(f'transaction.__dict__: {transaction.__dict__}\n')
+
+    transaction_json = transaction.to_json()
+    restored_transaction = Transaction.from_json(transaction_json)
+    print(f'\nrestored_transaction.__dict__: {restored_transaction.__dict__}')
 
 
 if __name__ == '__main__':

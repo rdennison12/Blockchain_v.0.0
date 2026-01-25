@@ -2,6 +2,7 @@ import time
 
 from backend.blockchain.block import Block
 from backend.blockchain.blockchain import Blockchain
+from backend.wallet.transaction import Transaction
 from pubnub.callbacks import SubscribeCallback
 from pubnub.pubnub import PubNub
 from pubnub.pnconfiguration import PNConfiguration
@@ -38,7 +39,9 @@ class Listener(SubscribeCallback):
             except Exception as e:
                 print(f'\n -- Did not replace chain: {e}')
         elif message_object.channel == CHANNELS['TRANSACTION']:
-            print(f'\n -- Received transaction: {message_object.message}')
+            transaction = Transaction.from_json(message_object.message)
+            self.transaction_pool.set_transaction(transaction)
+            print(f'\n -- Set the new transaction in the transaction pool: {transaction.id}')
 
 
 class PubSub:
