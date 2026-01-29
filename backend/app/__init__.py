@@ -9,9 +9,10 @@ from backend.wallet.wallet import Wallet
 from backend.wallet.transaction import Transaction
 
 from backend.wallet.transaction_pool import TransactionPool
+
 app = Flask(__name__)
 blockchain = Blockchain()
-wallet = Wallet()
+wallet = Wallet(blockchain)
 transaction_pool = TransactionPool()
 pubsub = PubSub(blockchain, transaction_pool)
 
@@ -28,10 +29,12 @@ def route_blockchain():
 
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
-    transaction_data = 'stubbed_transaction_data'
+    transaction_data = transaction_pool.transaction_data()
+    transaction_data.append(Transaction.reward_transaction(wallet).to_json())
     blockchain.add_block(transaction_data)
     block = blockchain.chain[-1]
     pubsub.broadcast_block(block)
+    transaction_pool.clear_blockchain_transactions(blockchain)
     return jsonify(block.to_json())
 
 
@@ -41,19 +44,23 @@ def route_wallet_transact():
     transaction = transaction_pool.existing_transaction(wallet.address)
     if transaction:
         transaction.update(
-        wallet,
-        transaction_data['recipient'],
-        transaction_data['amount']
-    )
+            wallet,
+            transaction_data['recipient'],
+            transaction_data['amount']
+        )
     else:
         transaction = Transaction(
-        wallet,
-        transaction_data['recipient'],
-        transaction_data['amount']
-    )
+            wallet,
+            transaction_data['recipient'],
+            transaction_data['amount']
+        )
 
     pubsub.broadcast_transaction(transaction)
     return jsonify(transaction.to_json())
+
+@app.route('/wallet/info')
+def route_wallet_info():
+    return jsonify({'address': wallet.address, 'balance': wallet.balance})
 
 
 ROOT_PORT = 5000

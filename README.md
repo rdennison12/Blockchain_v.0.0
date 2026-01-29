@@ -24,6 +24,7 @@ This could change in the future to use the venv module.
 * Adding the ability to run transactions on a network
 * Fixed a bug in the tracaction and wallet classes
 * Completed adding transaction to the network
+* Completed adding mining rewards and the associated tests
 
 
 
