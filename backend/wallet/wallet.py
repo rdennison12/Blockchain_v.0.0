@@ -93,7 +93,12 @@ class Wallet:
         if not blockchain:
             return balance
 
-        for block in blockchain.chain:
+        if isinstance(blockchain, list):
+            chain = blockchain
+        else:
+            chain = blockchain.chain
+
+        for block in chain:
             for transaction in block.data:
                 if transaction['input']['address'] == address:
                     # Any time the address conducts a new transaction,

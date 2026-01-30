@@ -25,6 +25,7 @@ This could change in the future to use the venv module.
 * Fixed a bug in the tracaction and wallet classes
 * Completed adding transaction to the network
 * Completed adding mining rewards and the associated tests
+* Backend is now fully functional and all associated tests pass
 
 
 
