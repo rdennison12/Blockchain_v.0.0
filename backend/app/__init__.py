@@ -7,7 +7,6 @@ from backend.blockchain.blockchain import Blockchain
 from backend.pubsub import PubSub
 from backend.wallet.wallet import Wallet
 from backend.wallet.transaction import Transaction
-
 from backend.wallet.transaction_pool import TransactionPool
 
 app = Flask(__name__)

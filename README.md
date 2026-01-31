@@ -26,6 +26,7 @@ This could change in the future to use the venv module.
 * Completed adding transaction to the network
 * Completed adding mining rewards and the associated tests
 * Backend is now fully functional and all associated tests pass
+* Setting up the application frontend
 
 
 
@@ -79,4 +80,10 @@ Example: py -m backend.blockchain.block
 **To run the application with a peer on Windows using PowerShell**
 
 ``` $env:PEER='True'; py -m backend.app```
+
+**Run the frontend**
+
+In the frontend directory run:
+
+```npm run start```
 

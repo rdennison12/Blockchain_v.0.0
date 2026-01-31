@@ -6,12 +6,12 @@ from backend.wallet.transaction import Transaction
 from pubnub.callbacks import SubscribeCallback
 from pubnub.pubnub import PubNub
 from pubnub.pnconfiguration import PNConfiguration
-from backend.app import pubsub_config
+from backend.app.pubsub_config import PUBLISH_KEY, SUBSCRIBE_KEY
 
 pnconfig = PNConfiguration()
 
-pnconfig.subscribe_key = pubsub_config.SUBSCRIBE_KEY
-pnconfig.publish_key = pubsub_config.PUBLISH_KEY
+pnconfig.subscribe_key = SUBSCRIBE_KEY
+pnconfig.publish_key = PUBLISH_KEY
 pnconfig.user_id = "blockchain-backend-shell"
 
 CHANNELS = {
