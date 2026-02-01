@@ -27,6 +27,7 @@ This could change in the future to use the venv module.
 * Completed adding mining rewards and the associated tests
 * Backend is now fully functional and all associated tests pass
 * Setting up the application frontend
+* Decided to place this into a commit to have it for learning purposes
 
 
 

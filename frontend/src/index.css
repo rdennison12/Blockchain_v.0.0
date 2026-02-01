@@ -3,7 +3,7 @@ body {
   color: #fff;
   text-align: center;
   font-size: 18px;
-  font-family: 'Quicksand';
+  font-family: 'Quicksand', sans-serif;
   padding-top: 5%;
   word-wrap: break-word;
 }
