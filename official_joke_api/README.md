@@ -1,4 +1,4 @@
-# Official Joke API
+# Official JokeJs API
 
 ## Endpoints:
 
