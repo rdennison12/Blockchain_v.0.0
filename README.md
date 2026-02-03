@@ -29,6 +29,14 @@ This could change in the future to use the venv module.
 * Setting up the application frontend
 * Decided to place this into a commit to have it for learning purposes
 * Added the blockchain to the frontend and enabled show/hide functionality
+* Course is now complete
+  * Will be adding the following improvements in the future:
+    * Synchronization without the root node
+    * Ability to catch a blockchain up that has fallen behind
+    * Create API endpoints that reads more information from the blockchain
+    * Transaction pool that validates transactions before adding them to the blockchain
+    * Applications for non-miners to use the blockchain
+    * Frontend functionality and styling
 
 
 
@@ -89,3 +97,10 @@ In the frontend directory run:
 
 ```npm run start```
 
+**Run the application with seed data**
+
+``` $env:SEED_DATA='True'; py -m backend.app```
+
+**Setup for React navigation**
+
+history.navigate('/name_of_page').then(r => console.log(r));
